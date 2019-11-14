@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuangxin.musicroom.client.mapper.PlanMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chuangxin.musicroom.core.entity.Plan">
+        <id column="id" property="id" />
+        <result column="author_id" property="authorId" />
+        <result column="title" property="title" />
+        <result column="cover" property="cover" />
+        <result column="period" property="period" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="support_num" property="supportNum" />
+        <result column="is_valid" property="isValid" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user_id" property="updateUserId" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, author_id AS authorId, title, cover, period, start_time AS startTime, end_time AS endTime, support_num AS supportNum, is_valid AS isValid, create_user_id AS createUserId, create_time AS createTime, update_user_id AS updateUserId, update_time AS updateTime
+    </sql>
+
+    <select id="getList" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        SELECT *
+        FROM plan
+        WHERE is_valid = 1
+        ORDER BY create_time desc
+       
+    </select> 
+
+</mapper>

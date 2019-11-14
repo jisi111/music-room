@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuangxin.musicroom.client.mapper.OrdersMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chuangxin.musicroom.core.entity.Orders">
+        <id column="id" property="id" />
+        <result column="goods_id" property="goodsId" />
+        <result column="seller_id" property="sellerId" />
+        <result column="buyer_id" property="buyerId" />
+        <result column="status" property="status" />
+        <result column="trade_type" property="tradeType" />
+        <result column="rent_start_time" property="rentStartTime" />
+        <result column="rent_end_time" property="rentEndTime" />
+        <result column="goods_price" property="goodsPrice" />
+        <result column="total_amount" property="totalAmount" />
+        <result column="deposit" property="deposit" />
+        <result column="is_deposit_free" property="isDepositFree" />
+        <result column="is_ship_free" property="isShipFree" />
+        <result column="ship_price" property="shipPrice" />
+        <result column="rent_time" property="rentTime" />
+        <result column="pay_type" property="payType" />
+        <result column="ali_orders_id" property="aliOrdersId" />
+        <result column="ali_buyer_id" property="aliBuyerId" />
+        <result column="ali_buyer_logon_id" property="aliBuyerLogonId" />
+        <result column="wx_orders_id" property="wxOrdersId" />
+        <result column="wx_open_id" property="wxOpenId" />
+        <result column="ship_address" property="shipAddress" />
+        <result column="ship_contact" property="shipContact" />
+        <result column="ship_phone" property="shipPhone" />
+        <result column="ship_remind_num" property="shipRemindNum" />
+        <result column="ship_remind_time" property="shipRemindTime" />
+        <result column="receive_remind_time" property="receiveRemindTime" />
+        <result column="is_valid" property="isValid" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user_id" property="updateUserId" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, goods_id AS goodsId, seller_id AS sellerId, buyer_id AS buyerId, status, trade_type AS tradeType, rent_start_time AS rentStartTime, rent_end_time AS rentEndTime, goods_price AS goodsPrice, total_amount AS totalAmount, deposit, is_deposit_free AS isDepositFree, is_ship_free AS isShipFree, ship_price AS shipPrice, rent_time AS rentTime, pay_type AS payType, ali_orders_id AS aliOrdersId, ali_buyer_id AS aliBuyerId, ali_buyer_logon_id AS aliBuyerLogonId, wx_orders_id AS wxOrdersId, wx_open_id AS wxOpenId, ship_address AS shipAddress, ship_contact AS shipContact, ship_phone AS shipPhone, ship_remind_num AS shipRemindNum, ship_remind_time AS shipRemindTime, receive_remind_time AS receiveRemindTime, is_valid AS isValid, create_user_id AS createUserId, create_time AS createTime, update_user_id AS updateUserId, update_time AS updateTime
+    </sql>
+
+    <select id="getList" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        SELECT *
+        FROM orders
+        WHERE is_valid = 1
+        ORDER BY create_time desc
+       
+    </select> 
+
+</mapper>

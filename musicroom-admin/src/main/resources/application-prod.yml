@@ -1,0 +1,27 @@
+enviroment: prod
+
+swaggerEnable: true
+
+# 腾讯云
+tx:
+  videoProcedure: mp4-sd
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/musicroom?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  redis:
+    database: 0
+    hostName: r-wz9i6tlm46g55t45bbpd.redis.rds.aliyuncs.com
+    port: 6379
+    password: musicroom12345678
+    timeout: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+      timeout: 10000
+            

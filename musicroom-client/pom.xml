@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.7.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.chuangxin.musicroom</groupId>
+    <artifactId>musicroom-client</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>musicroom-client</name>
+    <description>享啦琴房</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <packageEnv>dev</packageEnv>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <packageEnv>prod</packageEnv>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.chuangxin.musicroom</groupId>
+            <artifactId>musicroom-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <!--解决多环境编译参数active: @packageEnv@报错：found character '@' that cannot start any token. (Do not use @ for indentation)-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <!-- 编译java目录下的xml，因为idea打包时默认忽略src目录的xml文件，导致mybatis报错Invalid bound statement (not found) -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>  
+               <groupId>org.apache.maven.plugins</groupId>  
+               <artifactId>maven-resources-plugin</artifactId>
+               <configuration>
+                   <nonFilteredFileExtensions>  
+                       <nonFilteredFileExtension>woff</nonFilteredFileExtension>  
+                       <nonFilteredFileExtension>eot</nonFilteredFileExtension>  
+                       <nonFilteredFileExtension>ttf</nonFilteredFileExtension>  
+                       <nonFilteredFileExtension>svg</nonFilteredFileExtension>  
+                       <nonFilteredFileExtension>xls</nonFilteredFileExtension>  
+                       <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>  
+                   </nonFilteredFileExtensions>  
+               </configuration>  
+           </plugin>  
+        </plugins>
+    </build>
+
+</project>

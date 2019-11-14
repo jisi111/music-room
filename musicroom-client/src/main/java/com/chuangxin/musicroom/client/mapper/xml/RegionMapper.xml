@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuangxin.musicroom.client.mapper.RegionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chuangxin.musicroom.core.entity.Region">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="pcode" property="pcode" />
+        <result column="name" property="name" />
+        <result column="merger_name" property="mergerName" />
+        <result column="short_name" property="shortName" />
+        <result column="merger_short_name" property="mergerShortName" />
+        <result column="level_type" property="levelType" />
+        <result column="city_code" property="cityCode" />
+        <result column="zip_code" property="zipCode" />
+        <result column="pinyin" property="pinyin" />
+        <result column="jianpin" property="jianpin" />
+        <result column="first_char" property="firstChar" />
+        <result column="lng" property="lng" />
+        <result column="lat" property="lat" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, code, pcode, name, merger_name AS mergerName, short_name AS shortName, merger_short_name AS mergerShortName, level_type AS levelType, city_code AS cityCode, zip_code AS zipCode, pinyin, jianpin, first_char AS firstChar, lng, lat, remark
+    </sql>
+
+    <select id="getListByLevel" resultType="com.chuangxin.musicroom.core.dto.RegionTreeNode"
+            parameterType="int">
+        SELECT name, code AS id
+        FROM region
+        WHERE level_type = #{level}
+    </select>
+
+    <select id="getListByPcode" resultType="com.chuangxin.musicroom.core.dto.RegionTreeNode"
+            parameterType="string">
+        SELECT name, code AS id
+        FROM region
+        WHERE pcode = #{pcode}
+    </select>
+
+    <select id="getList" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        SELECT *
+        FROM region
+        WHERE is_valid = 1
+        ORDER BY create_time desc
+       
+    </select> 
+
+</mapper>

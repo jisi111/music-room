@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuangxin.musicroom.client.mapper.SystemLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chuangxin.musicroom.core.entity.SystemLog">
+        <id column="id" property="id" />
+        <result column="ip" property="ip" />
+        <result column="module" property="module" />
+        <result column="api" property="api" />
+        <result column="param" property="param" />
+        <result column="result_code" property="resultCode" />
+        <result column="result_data" property="resultData" />
+        <result column="duration" property="duration" />
+        <result column="level" property="level" />
+        <result column="is_valid" property="isValid" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user_id" property="updateUserId" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, ip, module, api, param, result_code AS resultCode, result_data AS resultData, duration, level, is_valid AS isValid, create_user_id AS createUserId, create_time AS createTime, update_user_id AS updateUserId, update_time AS updateTime
+    </sql>
+
+    <select id="getList" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        SELECT *
+        FROM system_log
+        WHERE is_valid = 1
+        ORDER BY create_time desc
+       
+    </select> 
+
+</mapper>

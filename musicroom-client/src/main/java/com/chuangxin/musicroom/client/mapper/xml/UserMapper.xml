@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuangxin.musicroom.client.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chuangxin.musicroom.core.entity.User">
+        <id column="id" property="id" />
+        <result column="nick_name" property="nickName" />
+        <result column="user_name" property="userName" />
+        <result column="phone" property="phone" />
+        <result column="wx_open_id" property="wxOpenId" />
+        <result column="rc_token" property="rcToken" />
+        <result column="password" property="password" />
+        <result column="image" property="image" />
+        <result column="sex" property="sex" />
+        <result column="birthday" property="birthday" />
+        <result column="sign" property="sign" />
+        <result column="account" property="account" />
+        <result column="alipay_account" property="alipayAccount" />
+        <result column="alipay_real_name" property="alipayRealName" />
+        <result column="last_blog_visit" property="lastBlogVisit" />
+        <result column="auth_level" property="authLevel" />
+        <result column="badge_level" property="badgeLevel" />
+        <result column="follow_num" property="followNum" />
+        <result column="fan_num" property="fanNum" />
+        <result column="likes_num" property="likesNum" />
+        <result column="collect_num" property="collectNum" />
+        <result column="district_id" property="districtId" />
+        <result column="district_name" property="districtName" />
+        <result column="city_id" property="cityId" />
+        <result column="city_name" property="cityName" />
+        <result column="province_id" property="provinceId" />
+        <result column="province_name" property="provinceName" />
+        <result column="contact_name" property="contactName" />
+        <result column="contact_phone" property="contactPhone" />
+        <result column="contact_address" property="contactAddress" />
+        <result column="is_valid" property="isValid" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user_id" property="updateUserId" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, nick_name AS nickName, user_name AS userName, phone, wx_open_id AS wxOpenId, rc_token AS rcToken, password, image, sex, birthday, sign, account, alipay_account AS alipayAccount, alipay_real_name AS alipayRealName, last_blog_visit AS lastBlogVisit, auth_level AS authLevel, badge_level AS badgeLevel, follow_num AS followNum, fan_num AS fanNum, likes_num AS likesNum, collect_num AS collectNum, district_id AS districtId, district_name AS districtName, city_id AS cityId, city_name AS cityName, province_id AS provinceId, province_name AS provinceName, contact_name AS contactName, contact_phone AS contactPhone, contact_address AS contactAddress, is_valid AS isValid, create_user_id AS createUserId, create_time AS createTime, update_user_id AS updateUserId, update_time AS updateTime
+    </sql>
+
+    <insert id="insertReturnId" parameterType="com.chuangxin.musicroom.core.entity.User"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != userName and '' != userName">
+                user_name,
+            </if>
+            <if test="null != nickName and '' != nickName">
+                nick_name,
+            </if>
+            <if test="null != phone and '' != phone">
+                phone,
+            </if>
+            <if test="null != account and '' != account">
+                account,
+            </if>
+            <if test="null != image and '' != image">
+                image,
+            </if>
+            <if test="null != isValid and '' != isValid">
+                is_valid,
+            </if>
+            create_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != userName and '' != userName">
+                #{userName},
+            </if>
+            <if test="null != nickName and '' != nickName">
+                #{nickName},
+            </if>
+            <if test="null != phone and '' != phone">
+                #{phone},
+            </if>
+            <if test="null != account and '' != account">
+                #{account},
+            </if>
+            <if test="null != image and '' != image">
+                #{image},
+            </if>
+            <if test="null != isValid and '' != isValid">
+                #{isValid},
+            </if>
+            SYSDATE(),
+        </trim>
+    </insert>
+
+    <!--1-10的id为保留的客服id-->
+    <select id="getList" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        SELECT *
+        FROM user
+        WHERE is_valid = 1
+        AND id > 10
+        ORDER BY create_time desc
+    </select>
+
+</mapper>
